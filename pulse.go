@@ -1,3 +1,1 @@
 package pulse
-
-func Info() {}
