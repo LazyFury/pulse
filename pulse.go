@@ -1,0 +1,3 @@
+package pulse
+
+func Info() {}
