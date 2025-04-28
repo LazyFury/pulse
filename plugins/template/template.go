@@ -148,9 +148,11 @@ func vite(_path string, manifestJSON []byte) template.HTML {
 
 	vite_url := global.GetConfig().GetString(constants.VITE_URL)
 	vite_build_dir := global.GetConfig().GetString(constants.VITE_BUILD_DIR)
+	debug := global.GetConfig().GetBool(constants.VITE_DEBUG)
+	vite_assets_root := global.GetConfig().GetString(constants.VITE_ASSETS_ROOT)
 	// log.Info(fmt.Sprintf("vite url: %s, vite build dir: %s", vite_url, vite_build_dir))
 
-	if global.GetConfig().GetBool(constants.VITE_DEBUG) {
+	if debug {
 		if ext == ".js" {
 			return template.HTML(`<script>/** Vite **/</script> <script type="module" src="` + (vite_url + _path) + `"></script> <script>/** Vite end **/</script>`)
 		}
@@ -209,11 +211,11 @@ func vite(_path string, manifestJSON []byte) template.HTML {
 			}
 		}
 
-		_html := `<script>/** Vite **/</script> <script type="module" src="` + jsFile + `"></script>`
+		_html := `<script>/** Vite **/</script> <script type="module" src="` + (vite_assets_root + jsFile) + `"></script>`
 
 		if cssFiles != nil {
 			for _, cssFile := range cssFiles.([]any) {
-				_html += `<link rel="stylesheet" href="` + cssFile.(string) + `">`
+				_html += `<link rel="stylesheet" href="` + (vite_assets_root + cssFile.(string)) + `">`
 			}
 		}
 
@@ -230,7 +232,7 @@ func vite(_path string, manifestJSON []byte) template.HTML {
 			return template.HTML("file not found in manifest: " + _path)
 		}
 
-		return template.HTML(`<style>/** Vite **/</style> <link rel="stylesheet" href="` + cssFile + `"> <style>/** Vite end **/</style>`)
+		return template.HTML(`<style>/** Vite **/</style> <link rel="stylesheet" href="` + (vite_assets_root + cssFile) + `"> <style>/** Vite end **/</style>`)
 	}
 
 	return template.HTML("unknown ext: " + ext)

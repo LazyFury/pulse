@@ -12,6 +12,8 @@ const VITE_URL = "vite.url"
 
 const VITE_DEBUG = "vite.debug"
 
+const VITE_ASSETS_ROOT = "vite.assets_root"
+
 const VITE_BUILD_DIR = "vite.build_dir"
 
 const THEME = "theme"
