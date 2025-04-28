@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/charmbracelet/log"
 	"github.com/spf13/viper"
 )
 
@@ -53,6 +52,6 @@ func NewConfigFromFile() *viper.Viper {
 var Config *viper.Viper
 
 func setup(config *viper.Viper) {
-	log.Info(fmt.Sprintf("config: %+v", config.AllSettings()))
+	// log.Info(fmt.Sprintf("config: %+v", config.AllSettings()))
 	Config = config
 }
