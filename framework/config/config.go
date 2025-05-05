@@ -31,13 +31,9 @@ func NewConfigFromFile() *viper.Viper {
 
 	config := viper.New()
 	config.SetConfigType("yaml")
-	config.AddConfigPath("./")              // current dir
-	config.AddConfigPath("./config/")       // config dir
-	config.AddConfigPath("../../")          //relative root
-	config.AddConfigPath("$HOME/.yoomall/") // home
+	config.AddConfigPath("./")        // current dir
+	config.AddConfigPath("./config/") // config dir
 	config.SetConfigName("config")
-
-	config.SetEnvPrefix("yoomall")
 	config.AutomaticEnv()
 
 	if err := config.ReadInConfig(); err != nil {
